@@ -15,10 +15,9 @@ RUN poetry install --no-root
 
 # Copy the rest of the application code to the container
 COPY fastapi_ddddocr/ ./fastapi_ddddocr/
-VOLUME /app/config.yaml
 
 # Expose the port the app runs on
 EXPOSE 8000
 
 # Command to run the application
-CMD ["poetry", "run", "python", "-m", "fastapi_ddddocr", "--config", "app/config.yaml"]
+CMD ["poetry", "run", "python", "-m", "fastapi_ddddocr", "--config", "/config/config.yaml"]
