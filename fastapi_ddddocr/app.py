@@ -6,6 +6,7 @@ from typing import Annotated
 import ddddocr
 import yaml
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from PIL import Image
 
@@ -77,5 +78,14 @@ def main():
     allowed_auth_tokens = config["auth_token"]
     host = config.get("host", "127.0.0.1")
     port = config.get("port", 8000)
+    allowed_cors = config.get("allowed_cors", ["*"])
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=allowed_cors,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
     uvicorn.run(app, host=host, port=port)
