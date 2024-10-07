@@ -1,0 +1,4 @@
+auth_token:
+  - "abcd12345678"
+host: "127.0.0.1"
+port: 8000
